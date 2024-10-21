@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn about Compound Interest</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: darkred;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: yellow;
+        }
+
+        tr:nth-child(odd) {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Learn about Compound Interest</h1>
+
+<div id="interestTables"></div>
+
+<script>
+  
+    function calculateCompoundInterest(principal, rate, years) {
+        return (principal * Math.pow(1 + rate, years)).toFixed(2);
+    }
+
+    const interestRates = [0.05, 0.06, 0.07];
+    const principal = 1000;
+    const years = 5;
+
+  
+    function createInterestTables() {
+        let output = '';
+
+        interestRates.forEach(rate => {
+            output += `
+            <h2>Compound Interest at ${(rate * 100).toFixed(0)}% Interest Rate</h2>
+            <table>
+                <tr>
+                    <th>Year</th>
+                    <th>Amount on Deposit</th>
+                    <th>Interest Rate</th>
+                </tr>`;
+
+            for (let year = 1; year <= years; year++) {
+                let amount = calculateCompoundInterest(principal, rate, year);
+                output += `
+                <tr>
+                    <td>${year}</td>
+                    <td>${amount}</td>
+                    <td>${rate.toFixed(2)}</td>
+                </tr>`;
+            }
+
+            output += `</table>`;
+        });
+
+        $('#interestTables').html(output);
+    }
+
+    $(document).ready(function () {
+        createInterestTables();
+    });
+</script>
+<br>
+<a href="https://garlandyu.github.io/homework4.html">Homework 4</a>
+
+</body>
+</html>
