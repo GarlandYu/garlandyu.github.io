@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 5 - Part 2</title>
+</head>
+<body>
+    <h1>Homework 5 - Part 2</h1>
+
+    <label for="menu1">Choose a website (opens on selection):</label>
+    <select id="menu1" onchange="openSiteOnChange()">
+        <option value="">Select a website</option>
+        <option value="https://www.yahoo.com">Yahoo</option>
+        <option value="https://www.wikipedia.org">Wikipedia</option>
+        <option value="https://www.youtube.com">Youtube</option>
+    </select><br><br>
+
+    <label for="menu2">Choose a website:</label>
+    <select id="menu2">
+        <option value="">Select a website</option>
+        <option value="https://www.google.com">Google</option>
+        <option value="https://www.bing.com">Bing</option>
+        <option value="https://www.duckduckgo.com">DuckDuckGo</option>
+    </select>
+    <button onclick="openSiteOnClick()">Go</button>
+
+    <script>
+        function openSiteOnChange() {
+            let menu1 = document.getElementById("menu1");
+            let url = menu1.value;
+
+            if (url) {
+                window.open(url, "_blank");
+                menu1.selectedIndex = 0;  
+            }
+        }
+
+        function openSiteOnClick() {
+            let menu2 = document.getElementById("menu2");
+            let url = menu2.value;
+
+            if (url) {
+                window.open(url, "_blank");
+                menu2.selectedIndex = 0;
+            } else {
+                alert("Please select a website from the dropdown menu.");
+            }
+        }
+    </script>
+    <br>
+     <a href="https://garlandyu.github.io/homework5.html">Back to Main Homework 5 Page</a><br><br>
+</body>
+</html>

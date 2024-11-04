@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 5 - Part 1</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Homework 5 - Part 1</h1>
+    
+
+    <form id="userForm">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName"><br><br>
+
+        <label>Age Group:</label><br>
+        <input type="radio" id="ageGroup1" name="ageGroup" value="less than 21">
+        <label for="ageGroup1">Less than 21</label><br>
+        <input type="radio" id="ageGroup2" name="ageGroup" value="between 21 and 50">
+        <label for="ageGroup2">Between 21 and 50</label><br>
+        <input type="radio" id="ageGroup3" name="ageGroup" value="older than 50">
+        <label for="ageGroup3">Older than 50</label><br><br>
+
+        <label>Browsers you use:</label><br>
+        <input type="checkbox" id="browserFirefox" name="browsers" value="Firefox">
+        <label for="browserFirefox">Firefox</label><br>
+        <input type="checkbox" id="browserEdge" name="browsers" value="Edge">
+        <label for="browserEdge">Edge</label><br>
+        <input type="checkbox" id="browserChrome" name="browsers" value="Chrome">
+        <label for="browserChrome">Chrome</label><br>
+        <input type="checkbox" id="browserSafari" name="browsers" value="Safari">
+        <label for="browserSafari">Safari</label><br><br>
+
+        <label for="movieType">Preferred Movie Type:</label>
+        <select id="movieType" name="movieType">
+            <option value="">Select one</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Science Fiction">Science Fiction</option>
+        </select><br><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+        <button type="reset">Clear</button>
+    </form>
+
+    <div id="outputArea"></div>
+
+    <script>
+        function submitForm() {
+            let isValid = true;
+            let outputArea = document.getElementById("outputArea");
+            outputArea.innerHTML = ""; 
+
+            let fullName = document.getElementById("fullName").value.trim();
+            if (fullName === "") {
+                outputArea.innerHTML += "<p class='error'>Please enter your full name.</p>";
+                isValid = false;
+            }
+
+            let ageGroupSelected = document.querySelector('input[name="ageGroup"]:checked');
+            if (!ageGroupSelected) {
+                outputArea.innerHTML += "<p class='error'>Please select an age group.</p>";
+                isValid = false;
+            }
+
+            let browserChecked = document.querySelectorAll('input[name="browsers"]:checked');
+            if (browserChecked.length === 0) {
+                outputArea.innerHTML += "<p class='error'>Please select at least one browser.</p>";
+                isValid = false;
+            }
+
+            let movieType = document.getElementById("movieType").value;
+            if (movieType === "") {
+                outputArea.innerHTML += "<p class='error'>Please select your preferred movie type.</p>";
+                isValid = false;
+            }
+
+            if (isValid) {
+                outputArea.innerHTML = "<p>Thanks, your data was submitted!</p>";
+            }
+        }
+    </script>
+
+<a href="https://garlandyu.github.io/homework5.html">Back to Main Homework 5 Page</a>
+</body>
+</html>
