@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Calculation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 30%;
+            height: 150px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #1e1d1d;
+            background-color: #f9f9f9;
+            resize: none;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number Calculation Tool</h1>
+    <form id="numberForm">
+        <label for="decimalInput">Enter a number with at least 4 decimals:</label><br><br>
+        <input type="text" id="decimalInput">
+        <br><br>
+        <button type="button" id="submitButton">Submit</button>
+        <button type="button" id="clearButton">Clear</button>
+    </form>
+    <textarea id="output" readonly></textarea>
+    <a href="https://garlandyu.github.io/hw6.html">Back to Homework 6 Main Page</a>
+
+    <script>
+        const input = document.getElementById('decimalInput');
+        const output = document.getElementById('output');
+        const submitButton = document.getElementById('submitButton');
+        const clearButton = document.getElementById('clearButton');
+
+        submitButton.addEventListener('click', () => {
+            const inputValue = parseFloat(input.value); 
+            if (isNaN(inputValue)) {
+                output.value = "Error: You need to enter a valid number.";
+                return;
+            }
+
+            const decimalPart = input.value.split('.')[1];
+            if (!decimalPart || decimalPart.length < 4) {
+                output.value = "Error: You need to type a number with at least 4 decimals, please try again.";
+                return;
+            }
+
+            const roundedInt = Math.round(inputValue);
+            const sqrtRounded = Math.round(Math.sqrt(inputValue));
+            const roundedTenths = inputValue.toFixed(1);
+            const roundedHundredths = inputValue.toFixed(2);
+            const roundedThousandths = inputValue.toFixed(3);
+
+            output.value = `
+            You typed number: ${inputValue}
+            Rounded to the nearest integer: ${roundedInt}
+            Square root rounded to integer: ${sqrtRounded}
+            Rounded to the nearest 10th position: ${roundedTenths}
+            Rounded to the nearest 100th position: ${roundedHundredths}
+            Rounded to the nearest 1000th position: ${roundedThousandths}`;
+        });
+
+        clearButton.addEventListener('click', () => {
+            input.value = ''; 
+            output.value = ''; 
+        });
+</script>
+</body>
+</html>

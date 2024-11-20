@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #282626;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #1e1d1d;
+            background-color: #f9f9f9;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Character Search Tool</h1>
+    <form id="searchForm">
+        <label for="longContent">Enter your content:</label><br>
+        <textarea id="longContent" rows="6" placeholder="Type your content here..."></textarea>
+        
+        <label for="searchChar">Enter a single character to search:</label><br>
+        <input type="text" id="searchChar" maxlength="1" placeholder="Enter one character">
+        
+        <button type="button" id="submitButton">Submit</button>
+    </form>
+    <div id="output" class="output"></div>
+    <a href="https://garlandyu.github.io/hw6.html">Back to Homework 6 Main Page</a>
+
+    <script>
+        const longContent = document.getElementById('longContent');
+        const searchChar = document.getElementById('searchChar');
+        const output = document.getElementById('output');
+        const submitButton = document.getElementById('submitButton');
+
+        submitButton.addEventListener('click', () => {
+            const content = longContent.value.toLowerCase();
+            const char = searchChar.value.toLowerCase();
+
+            output.textContent = '';
+
+            if (!char || char.length !== 1) {
+                output.textContent = "Error: Please enter a single character to search.";
+                return;
+            }
+
+            const count = content.split(char).length - 1;
+
+            if (count > 0) {
+                output.textContent = `The character "${char}" appears ${count} time(s) in the content.`;
+            } else {
+                const newWindow = window.open(
+                    '',
+                    'NotFoundWindow',
+                    'width=300,height=100,left=100,top=100'
+                );
+                newWindow.document.write(`
+                    <p>Search character "${char}" not found in the content you typed.</p>
+                    <button onclick="window.close()">Close</button>
+                `);
+                newWindow.document.close();
+                output.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>

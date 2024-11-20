@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Formatter</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[readonly] {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            margin-right: 10px;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Phone Number Formatter</h1>
+    <form id="phoneForm">
+        <label for="phoneInput">Enter your phone number:</label>
+        <input type="text" id="phoneInput" autocomplete="tel">
+
+        <label for="areaCode">Area Code:</label>
+        <input type="text" id="areaCode" readonly>
+
+        <label for="firstThree">First 3 Digits:</label>
+        <input type="text" id="firstThree" readonly>
+
+        <label for="lastFour">Last 4 Digits:</label>
+        <input type="text" id="lastFour" readonly>
+
+        <button type="button" id="processButton">Process</button>
+        <button type="button" id="clearButton">Clear</button>
+    </form>
+
+    <div id="errorMessage" class="error-message"></div>
+    <a href="https://garlandyu.github.io/hw6.html">Back to Homework 6 Main Page</a>
+
+    <script>
+        $(document).ready(function () {
+            $('#phoneInput').mask('(000) 000-0000');
+
+            $('#phoneInput').focus(function () {
+                if (navigator.userAgent.includes("Mobile")) {
+                    $(this).attr('autocomplete', 'tel'); 
+                }
+            });
+
+            $('#processButton').click(function () {
+                const phoneNumber = $('#phoneInput').val();
+                const regex = /^\((\d{3})\) (\d{3})-(\d{4})$/;
+                const match = phoneNumber.match(regex);
+
+                if (match) {
+                    $('#errorMessage').text('');
+                    $('#areaCode').val(match[1]);
+                    $('#firstThree').val(match[2]);
+                    $('#lastFour').val(match[3]);
+                } else {
+                    $('#errorMessage').text(
+                        'Error: Please enter the phone number in the format (999) 999-9999.'
+                    );
+                    $('#areaCode').val('');
+                    $('#firstThree').val('');
+                    $('#lastFour').val('');
+                }
+            });
+
+            $('#clearButton').click(function () {
+                $('#phoneInput').val('');
+                $('#areaCode').val('');
+                $('#firstThree').val('');
+                $('#lastFour').val('');
+                $('#errorMessage').text('');
+            });
+        });
+    </script>
+</body>
+</html>
