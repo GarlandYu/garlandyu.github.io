@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styling Example</title>
+    <style>
+        #styleArea {
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Style Application</h1>
+    
+    <div id="styleArea">
+        <p>Modify its style using the options below.</p>
+        <p>Feel free to change its appearance as you wish.</p>
+        <p>Watch how it transforms based on your selections!</p>
+    </div>
+
+    <form id="styleForm">
+        <h2>Select Styles</h2>
+        
+        <fieldset>
+            <legend>Background Color</legend>
+            <label>
+                <input type="radio" name="bgColor" value="lightblue"> Light Blue
+            </label><br>
+            <label>
+                <input type="radio" name="bgColor" value="lightgreen"> Light Green
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Font Style</legend>
+            <label>
+                <input type="checkbox" name="fontStyle" value="bold"> Bold
+            </label><br>
+            <label>
+                <input type="checkbox" name="fontStyle" value="italic"> Italic
+            </label><br>
+            <label>
+                <input type="checkbox" name="fontStyle" value="underline"> Underline
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Font Size</legend>
+            <select name="fontSize" id="fontSize">
+                <option value="1em">Small</option>
+                <option value="1.5em">Medium</option>
+                <option value="2em">Large</option>
+            </select>
+        </fieldset>
+
+        <p><a href="https://garlandyu.github.io/hw7.html">Back to Homework 7</a></p>
+    </form>
+
+    <script>
+        const styleArea = document.getElementById("styleArea");
+        const styleForm = document.getElementById("styleForm");
+        
+        styleForm.addEventListener('change', function() {
+    
+            const bgColor = styleForm.querySelector('input[name="bgColor"]:checked');
+            if (bgColor) {
+                styleArea.style.backgroundColor = bgColor.value;
+            } else {
+                styleArea.style.backgroundColor = ""; 
+            }
+
+            const fontStyles = styleForm.querySelectorAll('input[name="fontStyle"]:checked');
+            styleArea.style.fontWeight = "";
+            styleArea.style.fontStyle = "";
+            styleArea.style.textDecoration = "";
+            
+            fontStyles.forEach(function(checkbox) {
+                if (checkbox.value === "bold") {
+                    styleArea.style.fontWeight = "bold";
+                } 
+                if (checkbox.value === "italic") {
+                    styleArea.style.fontStyle = "italic";
+                } 
+                if (checkbox.value === "underline") {
+                    styleArea.style.textDecoration = "underline";
+                }
+            });
+
+            const fontSize = styleForm.fontSize.value;
+            styleArea.style.fontSize = fontSize;
+        });
+    </script>
+</body>
+</html>

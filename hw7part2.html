@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav li a {
+            display: block;
+            padding: 14px 20px;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav li a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown a {
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Homework Navigation Menu</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="https://hills.ccsf.edu/~jyu165/hw2.html">Homework 2</a>
+                <div class="dropdown">
+                    <a href="https://hills.ccsf.edu/~jyu165/homeworkpart1.html">Part 1</a>
+                    <a href="https://hills.ccsf.edu/~jyu165/homeworkpart2.html">Part 2</a>
+                
+                </div>
+            </li>
+            <li>
+                <a href="https://hills.ccsf.edu/~jyu165/homework3.html">Homework 3</a>
+                <div class="dropdown">
+                    <a href="https://hills.ccsf.edu/~jyu165/hw3part1.html">Part 1</a>
+                    <a href="https://hills.ccsf.edu/~jyu165/hw3part2.html">Part 2</a>
+                    <a href="https://hills.ccsf.edu/~jyu165/extra.html">Extra Credit</a>
+                </div>
+            </li>
+            <li>
+                <a href="https://garlandyu.github.io/homework4.html">Homework 4</a>
+                <div class="dropdown">
+                    <a href="https://garlandyu.github.io/hw4part1.html">Part 1</a>
+                    <a href="https://garlandyu.github.io/hw4part2.html">Part 2</a>
+                    <a href="https://garlandyu.github.io/extrapoint.html">Extra Credit</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <footer>
+        <a href="https://garlandyu.github.io/hw7.html">Back to Homework 7</a>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navItems = document.querySelectorAll("nav li");
+
+            navItems.forEach(item => {
+                item.addEventListener("mouseover", function () {
+                    const dropdown = this.querySelector(".dropdown");
+                    if (dropdown) {
+                        dropdown.style.display = "block";
+                    }
+                });
+
+                item.addEventListener("mouseout", function () {
+                    const dropdown = this.querySelector(".dropdown");
+                    if (dropdown) {
+                        dropdown.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
